@@ -8,7 +8,7 @@ PROJ = tp5
 #
 # source code
 #
-SRC += ./main2.cpp
+SRC += ./main31.cpp
 SRC += ./util.cpp
 FREERTOS_SRC += $(wildcard ./freertos/*.c)
 FREERTOS_SRC += ./freertos/portable/MemMang/heap_1.c
