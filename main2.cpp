@@ -36,7 +36,7 @@ int main() {
 	vTraceEnable( TRC_INIT);
 
 	// Creacion del mutex
-	xSemaphore = xSemaphoreCreateMutex();
+	xSemaphore = xSemaphoreCreateMutex(); // @suppress("Function cannot be resolved")
 
 	int index = 0;
 
@@ -75,12 +75,12 @@ void thread1(void *params) {
 	for (;;) {
 		pc.printf("Ejecutando tarea %s\n\r", currentTask->getName());
 
-		if (xSemaphoreTake(xSemaphore, portMAX_DELAY) == pdTRUE) {
+		if (xSemaphoreTake(xSemaphore, portMAX_DELAY) == pdTRUE) { // @suppress("Invalid arguments")
 			pc.printf("La tarea %s hace uso del recurso compartido\n\r",
 					currentTask->getName());
 			useSharedResource(currentTask->getC() * 1000);
 
-			xSemaphoreGive(xSemaphore);
+			xSemaphoreGive(xSemaphore); // @suppress("Invalid arguments")
 		}
 
 		// Bloquearse hasta la proxima instancia
