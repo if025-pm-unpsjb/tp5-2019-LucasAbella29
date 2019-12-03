@@ -84,13 +84,6 @@ void thread1(void *params) {
 		// Obtener el tick cuando arranca
 		start = xTaskGetTickCount();
 
-		// Si no es la primera ejecucion
-		if (instance > 0) {
-			if (xQueueReceive(xQueue1, &message, portMAX_DELAY)) { // @suppress("Invalid arguments")
-				pc.printf("La tarea %s recibio un mensaje, ya puede ejecutar\n\r", currentTask->getName());
-			}
-		}
-
 		// Hacer el trabajo
 		eatCpu(currentTask->getC() * 1000);
 
@@ -187,13 +180,6 @@ void thread3(void *params) {
 
 		// Hacer el trabajo
 		eatCpu(currentTask->getC() * 1000);
-
-		// Enviar mensaje a la cola de la tarea siguiente
-		if ( xQueueSend(xQueue1, (void* ) &message, portMAX_DELAY) == pdTRUE) { // @suppress("Invalid arguments")
-			pc.printf("La tarea %s envio un mensaje a la cola 1\n\r", currentTask->getName());
-		} else {
-			pc.printf("La tarea %s no pudo enviar un mensaje a la cola 1\n\r", currentTask->getName());
-		}
 
 		// Obtener el tick en el que finaliza
 		end = xTaskGetTickCount();
